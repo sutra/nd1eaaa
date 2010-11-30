@@ -1,0 +1,1 @@
+bin\bash.exe bin/nd1eaaa.sh
