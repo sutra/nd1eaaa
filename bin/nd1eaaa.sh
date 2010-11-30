@@ -21,7 +21,6 @@ for (( t = 1; t <= 10; t++ )); do
 			echo "从 ${url} 获取密码页面失败"
 			continue
 		elif echo "$pw" | grep '服务器人数过多，请稍候再来'; then
-			echo '服务器人数过多'
 			continue
 		else
 			echo "获得帐号成功：${host}, ${user}, ${pw}"
