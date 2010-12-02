@@ -1,3 +1,3 @@
 nd1eaaa is the auto ssh script revision 2 (http://paste-it.net/public/nd1eaaa/) running in cygwin.
 
-It allows you automatically open a socks5 proxy on the localhost using the free(of charge) ssh account of ssh2proxy.com, without installing cygwin as it is built-in.
+It allows you to automatically open a socks5 proxy on the localhost using the free(of charge) ssh account of ssh2proxy.com, without installing cygwin as it is built-in.
