@@ -1,6 +1,6 @@
 #! /bin/bash
 PATH=./bin
-urls=("http://www.ssh2proxy.com/" "http://blog.paying.org.ru/")
+urls=("http://free.ssh2proxy.com/" "http://blog.paying.org.ru/")
 users=("ssh2proxy.com" "paying.org.ru")
 hosts=("173.0.51.222" "196.46.191.163")
 lport=7070
