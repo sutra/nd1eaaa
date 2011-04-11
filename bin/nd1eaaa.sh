@@ -1,5 +1,5 @@
 #! /bin/bash
-PATH=./bin
+PATH=${PATH}:./bin
 urls=("http://free.ssh2proxy.com/" "http://blog.paying.org.ru/")
 users=("ssh2proxy.com" "paying.org.ru")
 hosts=("173.0.51.222" "196.46.191.163")
