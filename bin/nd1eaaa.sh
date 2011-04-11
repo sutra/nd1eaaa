@@ -5,35 +5,39 @@ users=("ssh2proxy.com" "paying.org.ru")
 hosts=("173.0.51.222" "196.46.191.163")
 lport=7070
 
-echo '尝试获得登录帐号……'
+echo y | plink -v -C -N -ssh -2 -P 22 -l waimao -pw waimao -D 7069 178.33.86.197 &
+echo "Sleeping 10 seconds..."
+sleep 10
+
+echo 'Try to get an SSH account...'
 for (( t = 1; t <= 10; t++ )); do
-	echo "第${t}次尝试……"
+	echo "Try ${t} time(s)..."
 	for (( i = 0; i < ${#urls[@]}; i++ )); do
 		url=${urls[$i]}
 		user=${users[$i]}
 		host=${hosts[$i]}
 
-		echo "正在从 ${url} 获取密码信息……"
+		echo "Obtaing SSH password from ${url} ..."
 
-		pw=$( curl -s "$url" | sed '/服务器密码/!d;s/^.*value="//;s/".*$//' )
+		pw=$( curl --socks5-hostname localhost:7069 --connect-timeout 10 -s "$url" | sed '/服务器密码/!d;s/^.*value="//;s/".*$//' )
 
 		if [ -z "$pw" ]; then
-			echo "从 ${url} 获取密码页面失败"
+			echo "Obtain SSH password from ${url} failed."
 			continue
 		elif echo "$pw" | grep '服务器人数过多，请稍候再来'; then
 			continue
 		else
-			echo "获得帐号成功：${host}, ${user}, ${pw}"
+			echo "Got the SSH account: ${host}, ${user}, ${pw}"
 			break 2
 		fi
 	done
 
 	sleep 60
 	[ $t -gt 9 ] && {
-		echo "已經嘗試連接十次.請稍後再試." ;
+		echo "Tried 10 times, please try again later." ;
 		exit 5
 	}
 done
 
-echo "建立隧道到：${host}……"
-plink "$host" -N -ssh -2 -P 22 -l "$user" -pw "$pw" -D $lport -v
+echo "Tunneling to${host} ..."
+echo y | plink -v -C -N -ssh -2 -P 22 -l "$user" -pw "$pw" -D $lport "$host"
